@@ -12,3 +12,7 @@ at first you need to know the resolution id for your video and audio that you wa
 yt-dlp -F "https://www.youtube.com/watch......."
 ![image](https://github.com/user-attachments/assets/389b79ce-90d3-4671-927b-723dcc563163)
 
+for example here i want the 400x244 resulotion that has 133 id and the mp4 audio that has 233 id
+
+yt-dlp -f 233 "vid url" -o "Saleh audio.mp4" && yt-dlp -f 133 "vid url" -o "Saleh vid.mp4" && ffmpeg -i "Saleh vid.mp4" -i "Saleh audio.mp4" -c:v copy -c:a aac -map 0:v -map 1:a "video_name.mp4" && del "Saleh audio.mp4" && del "Saleh vid.mp4"
+
