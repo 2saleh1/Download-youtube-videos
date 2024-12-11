@@ -14,6 +14,8 @@ Steps:
 
 Before downloading, you need to know the resolution ID for the video (MP4 only) and the audio you want to download. you can use the following command:
 
+yt-dlp -F "https://www.youtube.com/watch?v=example"
+
 ![image](https://github.com/user-attachments/assets/389b79ce-90d3-4671-927b-723dcc563163)
 
 for example here I want the mp4 audio that has 233 id and the 400x244 resulotion that has 133 id 
