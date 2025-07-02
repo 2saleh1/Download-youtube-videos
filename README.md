@@ -1,31 +1,139 @@
-# Download-youtube-videos
-Download youtube videos using yt-dlp 
+# Download YouTube Videos with yt-dlp
 
+A simple guide to download YouTube videos using yt-dlp with the best quality.
 
-Requirements:
+## 📋 Prerequisites
 
-You need to install "yt-dlp" and "ffmpeg"
+### 1. Update yt-dlp First!
+**Always update yt-dlp before downloading to avoid errors:**
+```bash
+# Update yt-dlp to latest version
+pip install --upgrade yt-dlp
 
-Steps:
+# Or if you installed via other methods:
+yt-dlp -U
+```
 
-1. Open Command Prompt (cmd).
+### 2. Install Required Tools
+- **yt-dlp**: `pip install yt-dlp`
+- **ffmpeg**: Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH
 
-2. Navigate to the folder where you want to save the video by using the cd command.
+## 🚀 Simple Method (Recommended)
 
-Before downloading, you need to know the resolution ID for the video (MP4 only) and the audio you want to download. you can use the following command:
+### Download Best Quality Video + Audio
+```bash
+yt-dlp -f "best[ext=mp4]" "https://www.youtube.com/watch?v=VIDEO_ID" -o "%(title)s.%(ext)s"
+```
 
-yt-dlp -F "https://www.youtube.com/watch?v=example"
+### Download Best Quality with Custom Name
+```bash
+yt-dlp -f "best[ext=mp4]" "https://www.youtube.com/watch?v=VIDEO_ID" -o "My_Video.mp4"
+```
 
-![image](https://github.com/user-attachments/assets/389b79ce-90d3-4671-927b-723dcc563163)
+### Download Specific Quality (e.g., 720p)
+```bash
+yt-dlp -f "best[height<=720][ext=mp4]" "https://www.youtube.com/watch?v=VIDEO_ID"
+```
 
-for example here I want the mp4 audio that has 233 id and the 400x244 resulotion that has 133 id 
+## 🎯 Advanced Method (Manual Selection)
 
-yt-dlp -f 233 "vid url" -o "Saleh audio.mp4" && yt-dlp -f 133 "vid url" -o "Saleh vid.mp4" && ffmpeg -i "Saleh vid.mp4" -i "Saleh audio.mp4" -c:v copy -c:a aac -map 0:v -map 1:a "video_name.mp4" && del "Saleh audio.mp4" && del "Saleh vid.mp4"
+If you need specific formats, follow these steps:
 
-Explanation:
+### 1. Check Available Formats
+```bash
+yt-dlp -F "https://www.youtube.com/watch?v=VIDEO_ID"
+```
 
-This command will download two separate files: the audio file (Saleh_audio.mp4) and the video file (Saleh_vid.mp4).
+### 2. Download with Specific Format IDs
+```bash
+# Example: Format 233 (audio) + Format 133 (video)
+yt-dlp -f 233+133 "https://www.youtube.com/watch?v=VIDEO_ID" -o "output_name.mp4"
+```
 
-Then, it will merge them into a single file named video_name.mp4.
+## 📁 Quick Setup
 
-Finally, it deletes the temporary audio and video files (Saleh_audio.mp4 and Saleh_vid.mp4).
+### 1. Open Command Prompt
+- Press `Win + R`, type `cmd`, press Enter
+
+### 2. Navigate to Download Folder
+```bash
+cd C:\Users\YourName\Downloads
+# Or wherever you want to save videos
+```
+
+### 3. Run the Download Command
+```bash
+yt-dlp -f "best[ext=mp4]" "PASTE_VIDEO_URL_HERE"
+```
+
+## 💡 Pro Tips
+
+### Download Entire Playlist
+```bash
+yt-dlp -f "best[ext=mp4]" "PLAYLIST_URL" -o "%(playlist_index)s - %(title)s.%(ext)s"
+```
+
+### Download Audio Only (MP3)
+```bash
+yt-dlp -x --audio-format mp3 "VIDEO_URL"
+```
+
+### Download with Subtitles
+```bash
+yt-dlp -f "best[ext=mp4]" --write-subs --sub-lang en "VIDEO_URL"
+```
+
+### Download from Multiple URLs
+```bash
+yt-dlp -f "best[ext=mp4]" -a urls.txt
+```
+*(Create a text file with one URL per line)*
+
+## 🛠️ Common Issues & Solutions
+
+### "Format not available"
+```bash
+# Try without format specification
+yt-dlp "VIDEO_URL"
+
+# Or use best available quality
+yt-dlp -f "best" "VIDEO_URL"
+```
+
+### "ffmpeg not found"
+- Download ffmpeg from official website
+- Extract to a folder (e.g., `C:\ffmpeg`)
+- Add `C:\ffmpeg\bin` to your system PATH
+
+### Videos downloading as separate files
+```bash
+# Force merge with ffmpeg
+yt-dlp -f "best[ext=mp4]" --merge-output-format mp4 "VIDEO_URL"
+```
+
+## 🎯 One-Line Solutions
+
+### High Quality Download
+```bash
+yt-dlp -f "best[height<=1080][ext=mp4]" "VIDEO_URL" -o "%(title)s.%(ext)s"
+```
+
+### Quick Download (Any Quality)
+```bash
+yt-dlp "VIDEO_URL"
+```
+
+### Batch Download with Good Names
+```bash
+yt-dlp -f "best[ext=mp4]" -o "%(uploader)s - %(title)s.%(ext)s" "VIDEO_URL"
+```
+
+---
+
+## 🚀 TL;DR - Just Want to Download?
+
+1. **Update**: `yt-dlp -U`
+2. **Navigate**: `cd C:\Users\YourName\Downloads`
+3. **Download**: `yt-dlp -f "best[ext=mp4]" "PASTE_URL_HERE"`
+
+**That's it!** ✅
